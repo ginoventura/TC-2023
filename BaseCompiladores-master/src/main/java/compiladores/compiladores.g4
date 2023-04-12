@@ -14,6 +14,8 @@ PC  : ')' ;
 LLA : '{' ;
 LLC : '}' ;
 ASIGN : '=' ;
+EQ : '==' ;
+COMA : ',' ;
 
 //Regla para los espacios en blanco
 WS : [ \n\t\r] -> skip ;
@@ -56,6 +58,18 @@ instrucciones : instruccion instrucciones
               |   
               ;
 
-instruccion : asignacion ;
+instruccion : asignacion 
+            | declaracion
+            ;
 
-asignacion : ID ASIGN NUMERO PYC;
+asignacion : ID ASIGN NUMERO PYC ;
+
+declaracion : INT ID inicializacion listaid PYC ;
+
+inicializacion : ASIGN NUMERO 
+               |    
+               ;
+
+listaid : COMA ID inicializacion listaid
+        |
+        ;
