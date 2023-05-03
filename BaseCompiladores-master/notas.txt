@@ -1,0 +1,24 @@
+Tabla de simbolos:
+
+Recolecta los identificadores, tipos de datos, funciones, clases, etc... para su uso en la compilacion.
+
+Los identificadores se obtienen del analizador lexico
+
+Los identificadores se buscan en la tabla cuando se los quiere usar
+
+Entonces, la tabla de simbolos debe tener dos funciones basicas:
+- Agregar un simbolo.
+- Buscar un simbolo.
+
+Posibles colecciones a usar:
+Vector, List, Map(Diccionario), Set
+
+Conviene implementarlo como una lista de mapas
+
+Un identificador debe tener:
+- String nombre
+- Boolean inicializado
+- Boolean usado
+- String tipoDato
+
+

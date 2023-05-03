@@ -27,9 +27,12 @@ EQ    : '==' ;
 //Regla para los espacios en blanco
 WS : [ \n\t\r] -> skip ;
 
+// Numeros
 NUMERO : DIGITO+ ;
 
-INT : 'int' ;                                      
+// Tipos de datos
+INT :    'int' ;   
+DOUBLE : 'double' ;                                   
 
 // OTRO : . ;
 
@@ -48,7 +51,7 @@ ID : (LETRA | '_')(LETRA | DIGITO | '_')* ;
 // match y derivar
 
 // Analisis sintactico ascendente:
-// Desplazar y reducir
+// desplazar y reducir
 
 si : s 
    | EOF
@@ -61,7 +64,7 @@ s : PA s PC s
   |
   ;
 
-/*
+
 // Un programa es un conjunto de instrucciones hasta final de archivo
 programa : instrucciones EOF ;
 
@@ -114,5 +117,3 @@ factor : NUMERO
        | ID
        | PA expresion PC
        ;
-
-*/
