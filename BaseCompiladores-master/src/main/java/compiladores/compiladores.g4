@@ -76,7 +76,12 @@ instrucciones : instruccion instrucciones
 // las instrucciones son:
 instruccion : asignacion 
             | declaracion
+//          | bloque
             ;
+
+/* Bloque de codigo
+bloque : LLA instrucciones LLC ;
+*/
 
 // Una asignacion es:
 asignacion : ID ASIGN expresion PYC ;
