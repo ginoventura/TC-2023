@@ -8,21 +8,25 @@ grammar compiladores;
 fragment LETRA : [A-Za-z] ;
 fragment DIGITO : [0-9] ;
 
-PYC   : ';' ;
-PA    : '(' ;
-PC    : ')' ;
-LLA   : '{' ;
-LLC   : '}' ;
-CA    : '[' ;
-CC    : ']' ;
-ASIGN : '=' ;
-COMA  : ',' ;
-SUMA  : '+' ;
-RESTA : '-' ;
-MULT  : '*' ;
-DIV   : '/';
-MOD   : '%' ;
-EQ    : '==' ;
+PYC   : ';'  ;
+PA    : '('  ;
+PC    : ')'  ;
+LLA   : '{'  ;
+LLC   : '}'  ;
+CA    : '['  ;
+CC    : ']'  ;
+ASIGN : '='  ;
+COMA  : ','  ;
+SUMA  : '+'  ;
+RESTA : '-'  ;
+MULT  : '*'  ;
+DIV   : '/'  ;
+MOD   : '%'  ;
+NOT   : '!'  ;
+COMPARADOR: '==' | '!=' | '>' | '>=' | '<' | '<='  ;
+
+// Bucles
+WHILE : 'while' ;
 
 //Regla para los espacios en blanco
 WS : [ \n\t\r] -> skip ;
@@ -53,17 +57,16 @@ ID : (LETRA | '_')(LETRA | DIGITO | '_')* ;
 // Analisis sintactico ascendente:
 // desplazar y reducir
 
-si : s 
-   | EOF
-   ;
+// si : s 
+//    | EOF
+//    ;
 
-//  PA (Abre parentesis) PC (Cierra parentesis)
-s : PA s PC s 
-  | LLA s LLC s
-  | CA s CC s
-  |
-  ;
-
+// // PA (Abre parentesis) PC (Cierra parentesis)
+// s : PA s PC s 
+//   | LLA s LLC s
+//   | CA s CC s
+//   |
+//   ;
 
 // Un programa es un conjunto de instrucciones hasta final de archivo
 programa : instrucciones EOF ;
@@ -76,20 +79,20 @@ instrucciones : instruccion instrucciones
 // las instrucciones son:
 instruccion : asignacion 
             | declaracion
-//          | bloque
+            | bloque
+            | iwhile
             ;
 
-/* Bloque de codigo
+// Bloque de codigo
 bloque : LLA instrucciones LLC ;
-*/
 
 // Una asignacion es:
-asignacion : ID ASIGN expresion PYC ;
+asignacion : ID ASIGN (NUMERO|ID) PYC ;
 
 // Una declaracion es:
 // una variable de tal tipo que se llama asi:
 // puede ser inicializada o puede ser un listado de variables
-declaracion : INT ID inicializacion listaid PYC ;
+declaracion : (INT|DOUBLE) ID inicializacion listaid PYC ;
 
 // una inicializacion
 inicializacion : ASIGN NUMERO 
@@ -101,7 +104,7 @@ listaid : COMA ID inicializacion listaid
         |
         ;
 
-// 
+/*
 expresion : termino exp ;
 
 exp : SUMA  termino exp 
@@ -122,3 +125,8 @@ factor : NUMERO
        | ID
        | PA expresion PC
        ;
+*/
+
+iwhile : WHILE PA comparacion PC (bloque|instruccion);
+
+comparacion : (NUMERO|ID) COMPARADOR (NUMERO|ID) ;
