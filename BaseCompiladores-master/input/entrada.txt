@@ -1,10 +1,6 @@
-int x;
-double y;
-int z = 0;
-double w, q, t;
-int a = 5, b, c = 10;
+int x = 0;
+x = 5 + 3 / 2;
 
-x = 1;
-z = y;
-
-while (x < y) { x = 5; }
+{
+    x = 0;
+}

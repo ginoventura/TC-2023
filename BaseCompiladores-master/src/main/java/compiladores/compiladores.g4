@@ -1,9 +1,9 @@
 grammar compiladores;
 
-//@header {
-//package compiladores;
+@header {
+package compiladores;
 
-//}
+}
 
 fragment LETRA : [A-Za-z] ;
 fragment DIGITO : [0-9] ;
@@ -47,6 +47,64 @@ ID : (LETRA | '_')(LETRA | DIGITO | '_')* ;
 //   | OTRO   { System.out.println("Otro ->" + $OTRO.getText() + "<--"); }     s
 //   | EOF
 //   ;
+
+// si : s
+//    | EOF
+//    ;
+
+// s : PA s PC s
+//   |
+//   ;
+
+programa : instrucciones EOF ;
+
+instrucciones : instruccion instrucciones
+              |
+              ;
+
+instruccion : asignacion
+            | declaracion
+            | bloque
+            ;
+
+bloque : LLA instrucciones LLC ;
+
+asignacion : ID ASIGN expresion PYC;
+
+declaracion : INT ID inicializacion listaid PYC ;
+
+inicializacion : ASIGN NUMERO
+               |
+               ;
+
+listaid : COMA ID inicializacion listaid
+        |
+        ;
+
+// X = ( 3 + 5 ) / 4; // ID ASSIGN expresion PYC
+
+expresion : termino exp ;
+
+exp : SUMA  termino exp
+    | RESTA termino exp
+    |
+    ;
+
+termino : factor term ;
+
+term : MULT factor term
+     | DIV  factor term
+     | MOD  factor term
+     |
+     ;
+
+factor : NUMERO
+       | ID
+       | PA expresion PC 
+       ;
+
+/*
+---------------------- MI CODIGO ----------------------
 
 // Tokens o reglas gramaticales: minuscula
 // Reglas lexicas: MAYUSCULA
@@ -125,8 +183,9 @@ factor : NUMERO
        | ID
        | PA expresion PC
        ;
-*/
 
 iwhile : WHILE PA comparacion PC (bloque|instruccion);
 
 comparacion : (NUMERO|ID) COMPARADOR (NUMERO|ID) ;
+
+ */

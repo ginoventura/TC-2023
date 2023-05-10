@@ -23,4 +23,28 @@ Un identificador debe tener:
 
 Un contexto es un subarbol
 
+Los metodos son para los objetos 
+Las funciones son procedurales
 
+c: compilador de una sola pasada
+python, java: compilador de multiple pasada
+
+// Tokens o reglas gramaticales: minuscula
+// Reglas lexicas: MAYUSCULA
+
+// Analisis sintactico descendente:
+// match y derivar
+
+// Analisis sintactico ascendente:
+// desplazar y reducir
+
+lexer:
+expresiones regulares
+
+parser:
+reglas gramaticales 
+
+cuantos hijos tiene un nodo
+depende de la cantidad de reglas 
+
+cuando hay un error lo descarta en la cantidad de tokens
