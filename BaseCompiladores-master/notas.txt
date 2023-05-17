@@ -29,14 +29,14 @@ Las funciones son procedurales
 c: compilador de una sola pasada
 python, java: compilador de multiple pasada
 
-// Tokens o reglas gramaticales: minuscula
-// Reglas lexicas: MAYUSCULA
+Tokens o reglas gramaticales: minuscula
+Reglas lexicas: MAYUSCULA
 
-// Analisis sintactico descendente:
-// match y derivar
+Analisis sintactico descendente:
+match y derivar
 
-// Analisis sintactico ascendente:
-// desplazar y reducir
+Analisis sintactico ascendente:
+desplazar y reducir
 
 lexer:
 expresiones regulares
@@ -48,3 +48,9 @@ cuantos hijos tiene un nodo
 depende de la cantidad de reglas 
 
 cuando hay un error lo descarta en la cantidad de tokens
+
+Visitor: solo visita la regla gramatical para ver que contiene el nodo 
+recorre la estructura del arbol
+
+Siempre los terminales y los nodos son arboles
+
