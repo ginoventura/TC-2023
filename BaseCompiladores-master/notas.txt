@@ -54,3 +54,86 @@ recorre la estructura del arbol
 
 Siempre los terminales y los nodos son arboles
 
+Codigo intermedio - (Codigo de 3 direcciones es el mas usado)
+Cada fabricante de compilador arma el codigo segun como lo necesite. 
+El codigo intermedio es para la portabilidad, para correr el mismo software en distintas computadoras.
+
+Genericamente es:
+x = y <op> z  
+
+NO puede haber mas de 3 direcciones, por ejemplo:
+x = y + z
+x = y
+
+En el codigo de tres direcciones se pueden poner etiquetas
+label l1
+jmp l1
+ifjmp x, l2
+push x
+pop x 
+call f
+halt -> fin de programa
+
+AL construir un generador de codigo intermedio necesito que tenga un generador de variables temporales
+y ademas un generador de etiquetas. Los generadores no repiten nombres ya utilizados. 
+
+x = 5 + 3 / 2
+\--> t0 = 3 / 2
+     t1 = 5 + t0
+     x = t1
+
+y = (z - 4 ) / (c + 8)
+\-> t0 = z - 4
+    t1 = e + 8
+    t2 = t0 / t1
+    y = t2
+
+if (x == 0) 
+    z = x;
+else 
+    z = -x;
+
+\-> t0 = x == 0
+    si es verdadero se hace el if
+    ifjmp t0, l0
+        z = x 
+        jmp l1                   si se hace z = x saltamos a l1 para evitar el else
+    label l0 
+        z = -x
+    label l1
+
+
+     1vez   11vez   10vez
+for (i = 0; i < 10; i++) 
+    c+=1;
+
+\-> i = 0
+    label l0 
+    t0 = i < 10
+    ifjmp t0, l1
+    c = c + 1
+    i = i + 1
+    jmp l0 
+    label l1
+
+
+x = f(x, y);
+
+int f(int x, int y) {
+    return x + y;
+}
+
+push x
+push y 
+push l0
+call f
+label l0 
+pop x
+...
+funtion f
+pop t0
+pop y 
+pop x
+t1 = x + y
+push t1
+jmp t0
